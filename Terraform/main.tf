@@ -1,50 +1,37 @@
 terraform {
   required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 4.0"
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "=3.0.0"
     }
   }
 }
 
-# Configure the AWS Provider
-provider "aws" {
-  region = "us-east-1"
-  access_key = "my-access-key"
-  secret_key = "my-secret-key"
-}
-
-resource "aws_resourcegroups_group" "test" {
-  name = "test-group"
-
-  resource_query {
-    query = <<JSON
-{
-  "ResourceTypeFilters": [
-    "AWS::EC2::Instance"
-  ],
-  "TagFilters": [
-    {
-      "Key": "Stage",
-      "Values": ["Test"]
-    }
-  ]
-}
-JSON
+  backend "azurerm" {
+    resource_group_name  = "StorageAccount-ResourceGroup"
+    storage_account_name = "abcd1234"
+    container_name       = "tfstate"
+    key                  = "prod.terraform.tfstate"
   }
+
+provider "azurerm" {
+  features {}
+  #subscription_id  = var.subscription_id
+  #client_id        = var.client_id
+  #client_secrets   = var.client_secret
+  #tennent_id       = var.tennent_id
 }
 
-resource "aws_s3_bucket" "b" {
-  bucket = "my-tf-test-bucket"
-
-  tags = {
-    Name        = "My bucket"
-    Environment = "Dev"
-  }
+# Create a resource group
+resource "azurerm_resource_group" "example" {
+  name     = "example-resources"
+  location = "West Europe"
 }
 
-
-# Create a VPC
-resource "aws_vpc" "example" {
-  cidr_block = "10.0.0.0/16"
+# Create a virtual network within the resource group
+resource "azurerm_virtual_network" "example" {
+  name                = "example-network"
+  resource_group_name = azurerm_resource_group.example.name
+  location            = azurerm_resource_group.example.location
+  address_space       = ["10.0.0.0/16"]
 }
