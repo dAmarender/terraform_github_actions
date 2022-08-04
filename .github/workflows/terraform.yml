@@ -8,10 +8,10 @@ on:
   pull_request:
     env:
 
-      ARM_CLIENT_ID:        ${{secrets.CLIENT_ID}}
-      ARM_CLIENT_SECRET:    ${{secrets.CLIENT_SECRET_ID}}
-      ARM_SUBSCRIPTION_ID:  ${{Secrets.SUBSCRIPTION_ID}}
-      ARM_TENANT_ID:        ${{secrets.CLIENT_ID}}
+      ARM_CLIENT_ID:        ${{secrets.AZURE_CLIENT_ID}}
+      ARM_CLIENT_SECRET:    ${{secrets.AZURE_CLIENT_SECRET}}
+      ARM_SUBSCRIPTION_ID:  ${{Secrets.SUAZURE_SUBSCRIPTION_ID}}
+      ARM_TENANT_ID:        ${{secrets.CLIENAZURE_TENANT_ID}}
       ROOT_PATH: '../../src/terraform'
 jobs:
   terraform:
