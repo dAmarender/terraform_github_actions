@@ -9,7 +9,7 @@ on:
     env:
 
       ARM_CLIENT_ID:        ${{secrets.CLIENT_ID}}
-      ARM_CLIENT_SECRET:    ${{secrets.CLIENT_SECRET}}
+      ARM_CLIENT_SECRET:    ${{secrets.CLIENT_SECRET_ID}}
       ARM_SUBSCRIPTION_ID:  ${{Secrets.SUBSCRIPTION_ID}}
       ARM_TENANT_ID:        ${{secrets.CLIENT_ID}}
       ROOT_PATH: '../../src/terraform'
