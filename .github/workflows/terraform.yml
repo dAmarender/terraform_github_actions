@@ -6,6 +6,12 @@ on:
     branches:
     - "master"
   pull_request:
+
+steps:
+- name: git echo secrets
+  run:
+      echo ${{ secrets.AZURE_CLIENT_ID }}
+
     env:
       ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
       ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
