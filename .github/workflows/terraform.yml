@@ -4,22 +4,20 @@ on:
   push:
     branches:
       - master
-    # paths:
-    #   - '**/actions/terraform-azure/**'
-  pull_request:
-  workflow_dispatch: #this attribute will enable the manual run to the pipeline
-  
-jobs:
-  terraform_plan:
-    name: 'Terraform'
-    runs-on: ubuntu-latest
-    environment: production
-    env: 
-      ROOT_PATH: '${{github.workspace}}/src/terraform'
+    pull_request:
+env: 
       ARM_CLIENT_ID: ${{secrets.AZURE_CLIENT_ID}}
       ARM_CLIENT_SECRET: ${{secrets.AZURE_CLIENT_SECRET}}
       ARM_SUBSCRIPTION_ID: ${{secrets.AZURE_SUBSCRIPTION_ID}}
       ARM_TENANT_ID: ${{secrets.AZURE_TENANT_ID}}
+      ROOT_PATH: '${{github.workspace}}/src/terraform'
+ 
+jobs:
+  terraform_plan:
+    name: 'Terraform plan'
+    runs-on: ubuntu-latest
+    environment: production
+    
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
@@ -29,7 +27,7 @@ jobs:
     steps:
     # Checkout the repository to the GitHub Actions runner
      - name: checkout
-       uses: actions/checkout@v3
+       uses: actions/checkout@v2
        
      - name: setup terraform
        uses: hashicorp/setup-terraform@v2
@@ -37,17 +35,16 @@ jobs:
             cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
           
      - name: Terraform Init
-          run: terraform init
-        working-directory: ${{env.ROOT_PATH}}
+        run:terraform init
+        working-directory:${{env.ROOT_PATH}}
 
      - name: Terraform Format
-        run: terraform fmt -check
-        working-directory: ${{env.ROOT_PATH}}
+        run:terraform fmt -check
+        working-directory:${{env.ROOT_PATH}}
       
      - name: Terraform Plan
-        id: Plan
-        run: terraform plan
-        working-directory: ${{env.ROOT_PATH}}
+        run:terraform plan
+        working-directory:${{env.ROOT_PATH}}
 
    # - name: Terraform Apply
    #    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
