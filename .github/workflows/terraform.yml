@@ -12,6 +12,20 @@ on:
   workflow_dispatch: #this attribute will enable the manual run to the pipeline
   
 
+<<<<<<< HEAD
+=======
+steps:
+- name: git echo secrets
+  run:
+      echo ${{ secrets.AZURE_CLIENT_ID }}
+
+    #env:
+     # ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+     # ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+     # ARM_SUBSCRIPTION_ID: ${{ Secrets.AZURE_SUBSCRIPTION_ID }}
+     # ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+     # ROOT_PATH: '../../src/terraform'
+>>>>>>> dd61bd0a25731e9870fc169732acd39e184e1766
 jobs:
   terraform_plan:
     name: 'Terraform'
