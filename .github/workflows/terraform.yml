@@ -29,28 +29,26 @@ jobs:
     steps:
     # Checkout the repository to the GitHub Actions runner
      - name: checkout
-       uses: actions/checkout@v3
-       
-     - name: setup terraform
-       uses: hashicorp/setup-terraform@v2
+       uses: actions/checkout@v2
+     - name: terraform
+       uses: hashicorp/setp-terraform@v1
        with:
-            cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
-          
-     - name: Terraform Init
-          id: init
-        run: terraform init
-        working-directory: ROOT_PATH
+          action: init
+          directory: ${{env.ROOT_PATH}}
+     - name: terraform validate
+       uses: hashicorp/setp-terraform@v1
+       with:
+          action: validate
+          directory: ${{env.ROOT_PATH}}
+    
+     - name: terraform plan
+       uses: hashicorp/setp-terraform@v1
+       with:
+          action: plan
+          directory: ${{env.ROOT_PATH}}
 
-     - name: Terraform Format
-        run: terraform fmt -check
-        
-     
-     
-
-     - name: Terraform Plan
-        id: Plan
-        run: terraform plan
-
-    - name: Terraform Apply
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-       run: terrafrom apply -auto-approve
+     - name: terraform apply
+       uses: hashicorp/setp-terraform@v1
+       with:
+          action: plan
+          directory: ${{env.ROOT_PATH}}
