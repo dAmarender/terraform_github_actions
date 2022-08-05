@@ -38,6 +38,7 @@ jobs:
           
      - name: Terraform Init
         run: terraform init
+        working-directory: ROOT_PATH
 
      - name: Terraform Format
         run: terraform fmt -check
