@@ -32,25 +32,22 @@ jobs:
     # Checkout the repository to the GitHub Actions runner
      - name: checkout
        uses: actions/checkout@v2
-     - name: terraform
-       uses: hashicorp/terraform-action@v1
-       with:
-          action: init
-          directory: ${{env.ROOT_PATH}}
-     - name: terraform validate
-       uses: hashicorp/terraform-action@v1
-       with:
-          action: validate
-          directory: ${{env.ROOT_PATH}}
-    
-     - name: terraform plan
-       uses: hashico/terraform-action@v1
-       with:
-          action: plan
-          directory: ${{env.ROOT_PATH}}
 
-     - name: terraform apply
-       uses: hashicorp/terraform-action@v1
-       with:
-          action: plan
-          directory: ${{env.ROOT_PATH}}
+     - name: setup terraform
+       steps:
+- uses: hashicorp/setup-terraform@v2
+  with:
+    cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+          
+     - name: Terraform Init
+        run: terrafrom inti
+
+     - name: Terraform Format
+        run: terrafrom fmt -check
+
+     - name: Terraform Plan
+        run: terrafrom Plan
+
+    - name: Terraform Apply
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+       run: terrafrom apply -auto-approve
