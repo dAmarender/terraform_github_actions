@@ -3,19 +3,20 @@ name: 'Terraform-action'
 on:
   push:
     branches:
-      - master
+      - main
     # paths:
     #   - '**/actions/terraform-azure/**'
   pull_request:
   workflow_dispatch: #this attribute will enable the manual run to the pipeline
   
+
 jobs:
   terraform_plan:
     name: 'Terraform'
     runs-on: ubuntu-latest
     environment: production
     env: 
-      ROOT_PATH: '../../src/terraform'
+      ROOT_PATH: './actions/terraform-azure'
       ARM_CLIENT_ID: ${{secrets.AZURE_CLIENT_ID}}
       ARM_CLIENT_SECRET: ${{secrets.AZURE_CLIENT_SECRET}}
       ARM_SUBSCRIPTION_ID: ${{secrets.AZURE_SUBSCRIPTION_ID}}
@@ -26,7 +27,9 @@ jobs:
       run:
         shell: bash
 
-    - name: checkout
+    steps:
+    # Checkout the repository to the GitHub Actions runner
+     - name: checkout
        uses: actions/checkout@v2
      - name: terraform
        uses: robertdebock/terraform-action@1.1.2
