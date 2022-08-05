@@ -30,10 +30,10 @@ jobs:
     # Checkout the repository to the GitHub Actions runner
      - name: checkout
        uses: actions/checkout@v2
-
+       
      - name: setup terraform
        uses: hashicorp/setup-terraform@v2
-          with:
+       with:
             cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
           
      - name: Terraform Init
