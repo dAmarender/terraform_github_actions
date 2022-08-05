@@ -87,7 +87,7 @@ jobs:
     # Checks that all Terraform configuration files adhere to a canonical format
     - name: Terraform Format
       run: terraform fmt -check
-      working-directory: ${{env.ROOT_PATH}}
+      working-directory: '/home/runner/work/terraform_github_actions/terraform_github_actions/src/terraform'
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
