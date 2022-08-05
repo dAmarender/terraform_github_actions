@@ -37,12 +37,15 @@ jobs:
             cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
           
      - name: Terraform Init
+        id: init
         run: terrafrom Inti
 
      - name: Terraform Format
+        id: fmt
         run: terrafrom fmt -check
 
      - name: Terraform Plan
+        id: Plan
         run: terrafrom Plan
 
     - name: Terraform Apply
