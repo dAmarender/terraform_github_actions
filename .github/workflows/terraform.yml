@@ -36,18 +36,18 @@ jobs:
        with:
             cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
           
-     
-     - name: Terraform Format
-        run: terrafrom fmt -check
-        
      - name: Terraform Init
-        run: terrafrom Inti
+        run: terraform Inti
 
+     - name: Terraform Format
+        run: terraform fmt -check
+        
+     
      
 
      - name: Terraform Plan
         id: Plan
-        run: terrafrom Plan
+        run: terraform Plan
 
     - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
