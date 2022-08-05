@@ -37,10 +37,10 @@ jobs:
             cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
           
      - name: Terraform Init
-        run: terraform Init
+        run: Terraform Init
 
      - name: Terraform Format
-        run: terraform fmt -check
+        run: Terraform fmt -check
         
      
      
