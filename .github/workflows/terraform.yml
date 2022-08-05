@@ -49,7 +49,7 @@ jobs:
         run: terraform plan
         working-directory: ${{env.ROOT_PATH}}
 
-    - name: Terraform Apply
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-       run: terrafrom apply -auto-approve
-       working-directory: ${{env.ROOT_PATH}}
+   # - name: Terraform Apply
+   #    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+   #  run: terrafrom apply -auto-approve
+   # working-directory: ${{env.ROOT_PATH}}
