@@ -61,7 +61,7 @@ jobs:
       ARM_CLIENT_SECRET: ${{secrets.AZURE_CLIENT_SECRET}}
       ARM_SUBSCRIPTION_ID: ${{secrets.AZURE_SUBSCRIPTION_ID}}
       ARM_TENANT_ID: ${{secrets.AZURE_TENANT_ID}}
-      ROOT_PATH: '${{ github.workspace }}/src/terraform'
+      ROOT_PATH: '${{ github.workspace }}'
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
@@ -87,8 +87,8 @@ jobs:
     # Checks that all Terraform configuration files adhere to a canonical format
     - name: Terraform Format
       run: terraform fmt -check
-      working-directory: '/home/runner/work/terraform_github_actions/terraform_github_actions/src/terraform'
-
+      working-directory: ${{env.ROOT_PATH}}
+      
     # Generates an execution plan for Terraform
     - name: Terraform Plan
       run: terraform plan -input=false
