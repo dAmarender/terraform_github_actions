@@ -33,24 +33,24 @@ jobs:
      - name: checkout
        uses: actions/checkout@v2
      - name: terraform
-       uses: hashicorp/terraform-action@1.1.2
+       uses: hashicorp/terraform-action@v1
        with:
           action: init
           directory: ${{env.ROOT_PATH}}
      - name: terraform validate
-       uses: hashicorp/terraform-action@1.1.2
+       uses: hashicorp/terraform-action@v1
        with:
           action: validate
           directory: ${{env.ROOT_PATH}}
     
      - name: terraform plan
-       uses: hashico/terraform-action@1.1.2
+       uses: hashico/terraform-action@v1
        with:
           action: plan
           directory: ${{env.ROOT_PATH}}
 
      - name: terraform apply
-       uses: hashicorp/terraform-action@1.1.2
+       uses: hashicorp/terraform-action@v1
        with:
           action: plan
           directory: ${{env.ROOT_PATH}}
