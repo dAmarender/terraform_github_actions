@@ -39,18 +39,18 @@ jobs:
      - name: Terraform Init
           id: init
           run: terraform init
-        working-directory: ROOT_PATH
+        working-directory: ${{env.ROOT_PATH}}
 
      - name: Terraform Format
         run: terraform fmt -check
-        
-     
-     
-
+        working-directory: ${{env.ROOT_PATH}}
+      
      - name: Terraform Plan
         id: Plan
         run: terraform plan
+        working-directory: ${{env.ROOT_PATH}}
 
     - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
        run: terrafrom apply -auto-approve
+       working-directory: ${{env.ROOT_PATH}}
