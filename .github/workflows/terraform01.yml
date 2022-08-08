@@ -51,7 +51,7 @@ on:
   pull_request:
   
 jobs:
-  terraform:
+  terraform_Plan:
     name: 'Terraform'
     runs-on: ubuntu-latest
     env: 
@@ -99,7 +99,7 @@ jobs:
       #run: terraform apply -auto-approve -input=false
 
 
-terraform Apply:
+terraform_apply:
     name: 'Terraform Apply'
     runs-on: ubuntu-latest
     needs: terraform plan
