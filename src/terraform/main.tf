@@ -19,12 +19,6 @@ provider "azurerm" {
 resource "azurerm_resource_group" "example" {
   name     = "example-resources"
   location = "West Europe"
-  tags = "new rg group"
-}
-resource "azurerm_resource_group" "example01" {
-  name     = "example-resources"
-  location = "West Europe"
-  tags = "new rg group01"
 }
 
 # Create a virtual network within the resource group
